@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+for filename in /dev/ttyACM*; do
+
+	if  udevadm info -n "$filename" | grep -q "VENDOR_ID=2988"; then
+		echo $filename
+	fi
+done
