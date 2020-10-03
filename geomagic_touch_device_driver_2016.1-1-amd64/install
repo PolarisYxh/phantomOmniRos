@@ -1,0 +1,113 @@
+#!/bin/bash -e
+# Check if user has root privileges or running as root. 
+
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+#Get location of the the script file. 
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+# Print Warning
+echo -n "THE COMPUTER MUST REBOOT AFTER THE INSTALLATION IN ORDER FOR THE DEVICES TO WORK PROPERLY. PLEASE SAVE ANY OPEN FILES OTHERWISE YOU WILL LOSE UNSAVED DATA."
+echo ""
+echo ""
+
+while :
+do
+	echo "The software will be installed to path : /opt/geomagic_touch_device_driver/"	
+	echo "Do you want to continue? (y/n): "
+	read con
+	echo ""
+
+	if [ "$con" = "y" -o "$con" = "Y" ]; then
+		
+		
+		#copy files to opt folder
+		echo "COPYING SYSTEM FILES"
+		
+		sudo cp -R $DIR/opt/* /opt
+		sudo cp -R $DIR/usr/lib/* /usr/lib
+
+		#Create symbolic links for all Qt dependencies
+		echo ""
+		echo -n "INSTALLING DEPENDENCIES..... "
+
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libicudata.so.49.1.2 /opt/geomagic_touch_device_driver/lib/libicudata.so.49
+
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libicui18n.so.49.1.2 /opt/geomagic_touch_device_driver/lib/libicui18n.so.49
+
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libicuuc.so.49.1.2 /opt/geomagic_touch_device_driver/lib/libicuuc.so.49
+
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5Core.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5Core.so
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5Core.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5Core.so.5
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5Core.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5Core.so.5.0
+
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5DBus.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5DBus.so
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5DBus.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5DBus.so.5
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5DBus.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5DBus.so.5.0
+
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5Gui.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5Gui.so
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5Gui.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5Gui.so.5
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5Gui.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5Gui.so.5.0
+
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5OpenGL.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5OpenGL.so
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5OpenGL.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5OpenGL.so.5
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5OpenGL.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5OpenGL.so.5.0
+
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5Widgets.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5Widgets.so
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5Widgets.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5Widgets.so.5
+		ln -sfn /opt/geomagic_touch_device_driver/lib/libQt5Widgets.so.5.0.2 /opt/geomagic_touch_device_driver/lib/libQt5Widgets.so.5.0
+		
+		sudo chmod -R 777 /opt/geomagic_touch_device_driver
+
+		echo "DONE!"
+		echo ""
+		
+		#Set path for GTDD_HOME, LD_LIBRARY_PATH, QT_PLUGIN_PATH
+
+		echo -n "SETTING ENVIRONMENT VARIABLES ..... "
+         	echo "export GTDD_HOME=/opt/geomagic_touch_device_driver" > /etc/profile.d/geomagic.sh
+		echo "export LD_LIBRARY_PATH=/opt/geomagic_touch_device_driver/lib" >> /etc/profile.d/geomagic.sh
+		echo "export QT_PLUGIN_PATH=/opt/geomagic_touch_device_driver/lib/plugins" >> /etc/profile.d/geomagic.sh
+
+		echo "DONE!"
+		echo ""
+
+		echo "Please reboot the computer before using Geomagic Touch Device Driver software. "
+		echo "Press ANY key to RESTART now or 'q' to cancel" 
+
+		read d
+
+		if [ "$d" = "q" -o "$d" = "Q" ]; then
+			echo ""
+			echo "Restart aborted."
+			echo ""
+			echo "Please make sure to restart the computer before using the software."
+			echo ""
+			break
+		else
+			echo ".... restarting"
+
+			sudo reboot
+			
+		fi
+
+	elif [ "$con" = "n" -o "$con" = "N" ]; then
+		echo "Installation aborted."
+		echo ""
+		break
+	else
+		echo "Invalid key."
+		echo ""
+	fi
+done
+
+#install
+

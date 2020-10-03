@@ -1,0 +1,49 @@
+##############################################################
+Geomagic Touch Device Drivers - version 2016.1-1 
+##############################################################
+
+Install Instructions:
+=====================
+Please unzip the tar.gz file named "geomagic_touch_device_driver_2016.1-1-amd64.tar.gz" by right clicking and selecting "extract here" or by running the following command from the terminal. 
+
+tar zxvf geomagic_touch_device_driver_2016.1-1-amd64.tar.gz 
+
+Now go to the path of the extracted package. 
+
+cd geomagic_touch_device_driver_2016.1-1-amd64/
+
+Now please run the script "install" found in the extracted folder as root from the terminal to install the software.  
+
+sudo ./install
+sudo mv /etc/profile.d/geomagic.sh  ./geomagic.sh
+run the ./geomagic.sh to replace follow steps:
+
+
+
+
+Software Install folder:
+======================== 
+
+/opt/geomagic_touch_device_driver/
+
+Apps installed: 
+===============
+
+Geomagic_Touch_Setup:
+---------------------
+Used to configure the haptic device settings. 
+
+/opt/geomagic_touch_device_driver/Geomagic_Touch_Setup
+
+Geomagic_Touch_Diagnostic:
+--------------------------
+Used to test the configured haptic devices. 
+
+/opt/geomagic_touch_device_driver/Geomagic_Touch_Geomagic_Touch_Diagnostic
+
+Hardware Documentation: 
+=======================
+The documentation for different haptic devices can be found in the following location. 
+
+/opt/geomagic_touch_device_driver/hardware_documentation/
+
