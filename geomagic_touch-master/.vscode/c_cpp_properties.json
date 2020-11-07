@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/why/phantomOmniRos/devel/include/**",
+                "/home/why/ros/devel/include/**",
+                "/opt/ros/melodic/include/**",
+                "/home/why/ros/src/kinova-ros-master/kinova_moveit/inverse_kinematics_plugins/ikfast/j2n6s300_ikfast/include/**",
+                "/home/why/ros/src/kinova-ros-master/kinova_moveit/inverse_kinematics_plugins/ikfast/j2s6s300_ikfast/include/**",
+                "/home/why/ros/src/kinova-ros-master/kinova_moveit/inverse_kinematics_plugins/ikfast/j2s7s300_ikfast/include/**",
+                "/home/why/ros/src/kinova-ros-master/kinova_moveit/kinova_arm_moveit_demo/include/**",
+                "/home/why/ros/src/kinova-ros-master/kinova_driver/include/**",
+                "/home/why/ros/src/kinova-ros-master/kinova_moveit/inverse_kinematics_plugins/ikfast/m1n6s300_ikfast/include/**",
+                "/home/why/ros/src/iqr_pan_tilt-master/pan_tilt_driver/include/**",
+                "/home/why/ros/src/universal_robot-melodic-devel/ur_kinematics/include/**",
+                "/usr/include/**"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14"
+        }
+    ],
+    "version": 4
+}

@@ -56,8 +56,8 @@ public:
 		ros::param::param(std::string("~device_name"), omni_name,
 				std::string("Geomagic"));
 
-                // Publish joint states for robot_state_publisher,
-                // and anyone else who wants them.
+		// Publish joint states for robot_state_publisher,
+		// and anyone else who wants them.
 		ROS_INFO("Omni name: %s", omni_name.c_str() );
 		std::ostringstream joint_topic;
 		joint_topic << "joint_states";
