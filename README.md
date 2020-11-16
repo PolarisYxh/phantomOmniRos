@@ -11,6 +11,7 @@ geomagic_touch-master   ros包
 
 
 ## issues reference:
+- diagnostic出问题，就重装驱动，setup重新添加geomagic设备
 https://www.google.com/amp/s/kyliublog.wordpress.com/2018/12/13/geomagic-touch-installation-in-ubuntu-16-04-ros-kinetic/amp/  
 https://github.com/inria-larsen/icub-manual/wiki/Installation-with-the-Geomagic-Touch
 
